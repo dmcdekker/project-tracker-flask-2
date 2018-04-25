@@ -43,8 +43,6 @@ def student_add():
     hackbright.make_new_student(first, last, github)
 
     return render_template("thank_you.html",
-    						first=first,
-    						last=last,
     						github=github)
 
 
