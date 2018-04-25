@@ -19,6 +19,33 @@ def connect_to_db(app):
     db.app = app
     db.init_app(app)
 
+def get_students():
+
+    QUERY = """
+        SELECT first_name, last_name, github
+        FROM students
+    """
+
+    db_cursor = db.session.execute(QUERY)
+
+    row = db_cursor.fetchall()
+
+    return row
+
+
+def get_projects():
+
+    QUERY = """
+        SELECT title
+        FROM projects
+    """
+
+    db_cursor = db.session.execute(QUERY)
+
+    row = db_cursor.fetchall()
+
+    return row      
+
 
 def get_student_by_github(github):
     """Given a GitHub account name, print info about the matching student."""
@@ -101,7 +128,7 @@ def get_grade_by_github_title(github, title):
 
 
 def assign_grade(github, title, grade):
-    """Assign a student a grade on an assignment and print a confirmation."""
+    """Assign a {{ project[0] }}student a grade on an assignment and print a confirmation."""
 
     QUERY = """
         INSERT INTO Grades (student_github, project_title, grade)
